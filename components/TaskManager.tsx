@@ -92,13 +92,6 @@ const TaskManager = () => {
     }
   };
 
-  const openEditDialog = (task: Task) => {
-    setEditingTask(task);
-    setEditTaskTitle(task.title);
-    setEditTaskStatus(task.status);
-    setIsEditDialogOpen(true);
-  };
-
   const filteredTasks = tasks.filter((task) => task.title.toLowerCase().includes(searchTerm.toLowerCase()));
 
   const formatDate = (dateString: string) => {
