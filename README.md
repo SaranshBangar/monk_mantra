@@ -469,7 +469,7 @@ npm start
 
 ### Vercel Deployment (Recommended)
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/username/monk_mantra)
+[![Deploy with Vercel](https://vercel.com/button)](https://monk-mantra.vercel.app/)
 
 1. Push your code to GitHub
 2. Connect your repository to Vercel
