@@ -1,12 +1,12 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Plus, Search, Edit, Trash2, LoaderCircle } from "lucide-react";
+import { Plus, Search, LoaderCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Badge } from "@/components/ui/badge";
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { getAllTasks, addTask, updateTask, updateTaskStatus, deleteTask, Task, TaskStatus } from "../app/actions";
+import TaskItem from "./TaskItem";
 
 const TaskManager = () => {
   const [tasks, setTasks] = useState<Task[]>([]);
@@ -65,6 +65,7 @@ const TaskManager = () => {
       console.error("Failed to update task:", error);
     }
   };
+
   const handleDeleteTask = async (taskId: string) => {
     try {
       await deleteTask(taskId);
@@ -181,7 +182,7 @@ const TaskManager = () => {
                   <Button variant="outline" onClick={() => setIsAddDialogOpen(false)} className="border-gray-300 text-gray-700 hover:bg-gray-100">
                     Cancel
                   </Button>
-                  <Button onClick={handleAddTask} className="bg-blue-600 hover:bg-blue-700 text-white">
+                  <Button onClick={handleAddTask} className="bg-gray-800 hover:bg-gray-900 text-white">
                     Add Task
                   </Button>
                 </DialogFooter>
@@ -198,36 +199,7 @@ const TaskManager = () => {
             </div>
           ) : (
             filteredTasks.map((task) => (
-              <div key={task.id} className="bg-white rounded-lg shadow-sm border border-gray-200 p-4 hover:shadow-md transition-shadow">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-3 flex-1">
-                    <input
-                      type="checkbox"
-                      checked={task.status === "complete"}
-                      onChange={() => handleToggleStatus(task)}
-                      className="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2"
-                    />
-                    <div className="flex-1">
-                      <div className="flex items-center gap-3 mb-2">
-                        <h3 className={`font-medium ${task.status === "complete" ? "text-gray-600 line-through" : "text-gray-900"}`}>{task.title}</h3>
-                        <Badge variant={task.status === "complete" ? "success" : "warning"} className="ml-auto">
-                          {task.status === "complete" ? "Complete" : "Pending"}
-                        </Badge>
-                      </div>
-                      <div className="text-sm text-gray-600 font-medium">Created: {formatDate(task.createdAt)}</div>
-                    </div>
-                  </div>
-
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    onClick={() => openDeleteDialog(task.id)}
-                    className="text-red-500 hover:text-red-700 hover:bg-red-50 ml-3"
-                  >
-                    <Trash2 className="h-4 w-4" />
-                  </Button>
-                </div>
-              </div>
+              <TaskItem key={task.id} task={task} onToggleStatus={handleToggleStatus} onDelete={openDeleteDialog} formatDate={formatDate} />
             ))
           )}
         </div>
@@ -269,7 +241,7 @@ const TaskManager = () => {
             <DialogFooter>
               <Button variant="outline" onClick={() => setIsEditDialogOpen(false)} className="border-gray-300 text-gray-700 hover:bg-gray-100">
                 Cancel
-              </Button>{" "}
+              </Button>
               <Button onClick={handleEditTask} className="bg-gray-800 hover:bg-gray-900 text-white cursor-pointer">
                 Update Task
               </Button>

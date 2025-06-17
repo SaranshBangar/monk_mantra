@@ -3,8 +3,8 @@ const Footer = () => {
 
   return (
     <footer className="flex justify-center items-center h-12 bg-gray-800 text-white mt-auto">
-      &copy;{currentYear} Made by{" "}
-      <span className="underline">
+      &copy; {currentYear} Made by
+      <span className="underline ml-1">
         <a href="https://www.saransh-bangar.xyz/" target="_blank">
           Saransh Bangar
         </a>
