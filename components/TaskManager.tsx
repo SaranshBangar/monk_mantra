@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Plus, Search, Edit, Trash2 } from "lucide-react";
+import { Plus, Search, Edit, Trash2, LoaderCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
@@ -113,7 +113,9 @@ const TaskManager = () => {
   if (loading) {
     return (
       <div className="flex-1 flex items-center justify-center">
-        <div className="text-gray-800 font-medium text-lg">Loading tasks...</div>
+        <div className="text-gray-800 font-medium text-lg animate-spin">
+          <LoaderCircle />
+        </div>
       </div>
     );
   }
