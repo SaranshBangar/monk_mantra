@@ -1,3 +1,13 @@
+import Footer from "./components/Footer";
+import Header from "./components/Header";
+import TaskManager from "./components/TaskManager";
+
 export default function Home() {
-  return <div>hi</div>;
+  return (
+    <main className="flex flex-col min-h-screen bg-gray-600">
+      <Header />
+      <TaskManager />
+      <Footer />
+    </main>
+  );
 }
